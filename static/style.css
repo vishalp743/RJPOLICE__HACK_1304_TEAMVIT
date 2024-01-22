@@ -1,0 +1,101 @@
+
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.file-input {
+  display: inline-block;
+  text-align: left;
+  background: #fff;
+  padding: 4px;
+  width: 300px;
+  position: absolute;
+  border-radius: 3px;
+  margin-left: 200px;
+  margin-top:300px;
+}
+
+.file-input > [type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.file-input > .button {
+  display: inline-block;
+  cursor: pointer;
+  background: #eee;
+  padding: 8px 16px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.file-input .button
+{
+background: dodgerblue;
+}
+
+.file-input:hover > .button {
+  background: dodgerblue;
+  color: white;
+}
+
+.file-input > .label {
+  color: #333;
+  white-space: nowrap;
+  opacity: .3;
+}
+
+.file-input.-chosen > .label {
+            opacity: 1;
+        }
+
+.grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px; /* Adjust the gap between images as needed */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-width: 2px;
+
+
+        }
+
+div:empty:before {
+  content:attr(data-placeholder);
+  color:white
+}
+
+
+        .grid-item {
+            width: 100%;
+            height: 220px;
+            object-fit: cover; /* Ensure images maintain aspect ratio within the grid items */
+        }
+        .grid-item img {
+            width: 95%;
+            height: 95%;
+            object-fit: cover; /* Ensure images maintain aspect ratio within the grid items */
+            border-radius:10px;
+        }
+
+        .card {
+      background-color: #333;
+      border: 1px solid #555;
+      color: #fff;
+    }
+
+    .card-header {
+      background-color: #555;
+    }
+
+    .card-footer {
+      background-color: #555;
+    }

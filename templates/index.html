@@ -1,0 +1,320 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+        <link rel="stylesheet" type="text/css" href="static/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	   <script src="https://kit.fontawesome.com/f52cd04ab4.js" crossorigin="anonymous"></script>
+    </head>
+
+	<body class="text-white bg-black">
+<!--    navbar -->
+        <nav class="navbar navbar-expand-lg bg-black fixed-top" style="color:white;">
+            <div class="container-fluid">
+                <a class="navbar-brand text-white" href="#">
+                    <img class="nav-img" src="../static/Images/logo.png" alt="Logo" width="150" height="50" class="d-inline-block align-text-top">
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item ">
+                              <a class="nav-link text-white" href="#">Home</a>
+
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link active text-white"  aria-current="page" href="{{ url_for('aboutpage') }}">About</a>
+                        </li>
+                         <li class="nav-item">
+                          <a class="nav-link active text-white"  aria-current="page" href="{{ url_for('oneClick') }}">OneClick</a>
+                        </li>
+                        </li>
+                         <li class="nav-item">
+                          <a class="nav-link active text-white"  aria-current="page" href="{{ url_for('video_feed') }}">VideoFeed</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+<!--nav end -->
+<!--hero start -->
+
+
+
+    <div class="overflow-hidden">
+        <div class="container-fluid col-xxl-8">
+            <div class="row flex-lg-nowrap align-items-center g-5">
+                <div class="order-lg-1 w-100">
+                    <img style="clip-path: polygon(20% 0%, 100% 0%, 100% 99%, 0% 100%);height:700px;width:750px" src="../static/Images/hero-image4.jpg">
+                </div>
+                <div class="col-lg-6 col-xl-5 text-center text-lg-start pt-lg-5 mt-xl-4">
+                    <div class="lc-block mb-4">
+                        <div editable="rich">
+                            <h1 class="fw-bold display-3">Deepfake detector, You Deserve the Truth.</h1>
+                        </div>
+                    </div>
+
+                    <div class="lc-block mb-5">
+                        <div editable="rich">
+                            <p class="rfs-8"> Don't Fall Victim to Deepfake Scams! Protect yourself from deepfake-generated misinformation with Deepfake Detector. Verify the authenticity of videos and audios with ease and confidence.</p>
+                        </div>
+                    </div>
+
+                    <div class="lc-block mb-6"><a class="btn btn-primary px-4 me-md-2 btn-lg" role="button" href="#implementation">Find Truth</a>
+                    </div>
+
+
+                    <div class="lc-block">
+
+                    </div>
+
+                </div>
+
+            </div><!-- /lc-block -->
+        </div>
+    </div>
+
+<!--hero end-->
+
+<!--steps start-->
+<section class="steps" style="background-color:	#383838; border-radius:40px;margin:40px;padding:40px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step">
+          <div class="step-icon" style=" background-color: #007bff;color: #fff;width: 80px;height: 80px;border-radius: 50%;margin: 0 auto;display: flex;align-items: center;justify-content: center;font-size: 40px;transition: all 0.3s ease;">
+           <i class="fa fa-upload"></i>
+          </div>
+          <h3 style="margin-top:20px;">Step 1: Upload your video</h3>
+          <p>Choose a video or audio file that you want to verify for authenticity. For best results, we recommend choosing a video or audio file that is between 5 and 7 seconds long and does not have any edits or special effects.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step">
+         <div class="step-icon" style=" background-color: #007bff;color: #fff;width: 80px;height: 80px;border-radius: 50%;margin: 0 auto;display: flex;align-items: center;justify-content: center;font-size: 40px;transition: all 0.3s ease;">
+            <i class="fa fa-search"></i>
+          </div>
+          <h3  style="margin-top:20px;">Click "Detect Deepfake"</h3>
+          <p>After uploading your video or audio file, click the "Detect Deepfake" button to start the verification process.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="step">
+         <div class="step-icon" style=" background-color: #007bff;color: #fff;width: 80px;height: 80px;border-radius: 50%;margin: 0 auto;display: flex;align-items: center;justify-content: center;font-size: 40px;transition: all 0.3s ease;">
+            <i class="fa fa-check"></i>
+          </div>
+          <h3  style="margin-top:20px;">View Results</h3>
+          <p>You will receive a result that shows the probability of the video or audio being either an AI-generated deepfake or a natural video or audio. This information will help you determine the authenticity of the video or audio you have uploaded.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!--steps end-->
+<!--implementation-->
+<section id="implementation">
+            <div class="card bg-black text-white">
+            <div >
+                <video id="video" controls style="max-width: 570px;
+                height: 500px;
+                border: 3px solid #007bff;
+                border-radius: 8px;
+                display: block;
+                margin: 0 850;">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+<!--step 1-->
+
+                <div class='file-input'>
+                  <input type="file" accept="video/*" id="fileInput">
+                  <span class='button'>Choose</span>
+                  <span class='label' data-js-label>No file selected</span>
+                </div>
+
+                <div class="step" style="margin-top: -480px;margin-left:200px;margin-right:800px;padding-bottom:180px">
+                    <h1>Step 1 ➡️</h1> <br>
+                      <h3 style="margin-top:20px;"> Upload your video</h3>
+                      <p>Don't Trust Any Voice You Hear In today's world, where deepfakes are becoming more sophisticated and widespread, it's increasingly important to be able to trust the authenticity of the voices we hear.</p>
+                </div>
+<!--end step 1-->
+
+
+<!--step 2-->
+                <div class="card-group" style="margin-left:200px;margin-right:100px;margin-top: 200px;">
+                  <div class="card bg-black text-white;" style="border-style: dashed;height:460px;border-color: white;margin-right:80px;color:white" id="xyz" contenteditable="true" data-placeholder="Hiiiiii">
+
+                         <div id="selectedImagesContainer"></div>
+
+                      <div class="card-body">
+                    </div>
+                  </div>
+                  <div class="card bg-dark text-white" style="height:460px;">
+                    <div class="card-body">
+                      <h1 class="card-title">⬅️ Step 2</h1><br><br>
+                        <h3>Face Extraction</h3>
+                      <p class="card-text">Face extraction is vital in deepfake detection as it enables analysis of facial features, helping algorithms identify anomalies and distinguish authentic content from manipulated deepfakes.</p>
+                         <button onclick="startProcessing()" class="btn btn-primary px-4 me-md-2" id="startProcessingButton">Submit</button>
+                    </div>
+                  </div>
+
+                </div>
+                <div id="hiddenDiv" style="display: none; margin-top:5%;margin-left:13%">
+
+                    <img id="outputImage" src="static/Images/output_image.png" height="350px" width="1300px" alt="Waveform Plot">
+            </div>
+
+<!--end step 2-->
+                <h1 class="card-title" style="text-align:center;margin-top:20px"></h1><br><br>
+                <div style="display: flex; margin-left:200px;">
+                {% for image in images %}
+                <img src="{{ url_for('static', filename='Frames/' + image) }}" alt="frame" height="150px" width="150px" style="margin-right: 45px;">
+                {% endfor %}
+                </div>
+
+<!--step 3-->
+                 <div class="card-group" style="margin-left:200px;margin-right:100px;margin-top:40px">
+                     <div class="card bg-dark text-white" style="height:400px;margin-right:60px">
+                    <div class="card-body">
+                      <h1 class="card-title">➡️ Step 3</h1><br><br>
+                        <h3>Detect Deepfake</h3>
+                      <p class="card-text">Ensure Audio and Video Authenticity and Avoid Misinformation Don't let the spread of deepfake videos and audios affect you or your organization. Ensure audio and video authenticity and avoid the potential pitfalls of misinformation with the services of Deepfake Detector.</p>
+
+                            <form action = "/entryimgfolder" method = "post">
+                                 <input type = "submit" value="Predeict" style="border:none;background-color:#0d6efd;border-radius:20px;color:white;padding:10 10px">
+                            </form>
+                    </div>
+                  </div>
+
+                  <div class="card bg-black text-white">
+                      <section id="result">
+
+                         <div class="card text-center">
+                      <div class="card-header">
+                        Featured Content
+                      </div>
+                             <br>
+                      <div class="card-body">
+                        <h5 class="card-title">Video and Audio Information</h5>
+                        <p class="card-text">
+                          <i class="fas fa-film" style="color: #ffcc00;"></i> For Video: {{for_video}}<br>
+                          <i class="fas fa-music" style="color: #4CAF50;"></i> For Audio: {{for_audio}}<br>
+                          Average Prediction for Video: {{average_prediction_for_video}}<br>
+                          Average Prediction for Audio: {{average_prediction_for_audio}} To be AI Genrated<br>
+                          Call or Not: {{call_or_not}}
+                        </p>
+                          <br>
+                      </div>
+
+                             <br>
+                    </div>
+
+                     </section >
+
+                    <div class="card-body">
+                    </div>
+                  </div>
+                </div>
+
+<!--end step 3-->
+
+                <div>
+                    <br>
+                    <br>
+                </div>
+
+
+
+
+
+            </div>
+    </section>
+
+
+
+
+            <form id="autoSubmitForm" action="/call" method="post" style="display: none;">
+                <input type="submit" value="Call">
+            </form>
+
+
+
+<!------------------------------------------------------------------------------------------------>
+<!--         {% set variable1 = "True" %}-->
+<!--         {% set variable2 = call_or_not %}-->
+
+<!--         {% if variable1 == variable2 %}-->
+<!--             <script>-->
+<!--                 document.addEventListener('DOMContentLoaded', function() {-->
+<!--                // Automatically submit the form when the page loads-->
+<!--                document.getElementById('autoSubmitForm').submit();-->
+<!--                });-->
+<!--            </script>-->
+<!--         {% endif %}-->
+
+         {% set variable3 = "Yes" %}
+         {% set variable4 = scroll %}
+
+         {% if variable3 == variable4%}
+            <script>
+
+                var resultSection = document.getElementById("result");
+                if (resultSection) {
+                  resultSection.scrollIntoView();
+                }
+
+                 var div = document.getElementById("hiddenDiv");
+                 div.style.display = (div.style.display === "none") ? "block" : "none";
+                 console.log("Hello");
+
+
+
+            </script>
+         {% endif %}
+
+
+
+          <script>
+              window.onload = function() {
+
+
+            };
+
+            function displayImage(imageSrc) {
+            const imageContainer = document.getElementById('xyz');
+
+            // Create an img element
+            const imgElement = document.createElement('img');
+            imgElement.src = imageSrc;
+            imgElement.alt = 'Image';
+            imgElement.style.width = '70%';
+              imgElement.style.position = 'absolute';
+            imgElement.style.top = '-2%';
+
+
+            // Append the img element to the imageContainer
+            imageContainer.appendChild(imgElement);
+
+            function displayImage1(imageSrc) {
+            const imageContainer = document.getElementById('xyz1');
+
+            // Create an img element
+            const imgElement = document.createElement('img');
+            imgElement.src = imageSrc;
+            imgElement.alt = 'Image';
+            imgElement.style.width = '70%';
+              imgElement.style.position = 'absolute';
+            imgElement.style.top = '-2%';
+
+
+            // Append the img element to the imageContainer
+            imageContainer.appendChild(imgElement);
+
+    }
+          </script>
+      <script src="../static/js/script.js"></script>
+      <script src="../static/js/face-api.min.js"></script>
+    </body>
+
+</html>

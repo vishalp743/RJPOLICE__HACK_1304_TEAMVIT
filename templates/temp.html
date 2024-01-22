@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iframe Content</title>
+  <script src="static/js/face-api.min.js"></script>
+</head>
+<body>
+  <video id="video" width="640" height="480" style="transform: scaleX(-1);" autoplay muted></video>
+  <script>
+    const video = document.getElementById('video');
+    let frameCount = 0;
+
+    async function startProcessing() {
+      await setupCamera();
+
+      Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('static/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('static/models'),
+        faceapi.nets.faceRecognitionNet.loadFromUri('static/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('static/models')
+      ]).then(processVideo);
+    }
+
+    async function setupCamera() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
+        video.srcObject = stream;
+      } catch (error) {
+        console.error('Error accessing camera:', error);
+      }
+    }
+
+    function processVideo() {
+      video.play();
+
+      const processFrames = async () => {
+        if (video.videoWidth && video.videoHeight) {
+          const displaySize = { width: video.videoWidth, height: video.videoHeight };
+
+          const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
+          const resizedDetections = faceapi.resizeResults(detections, displaySize);
+
+          if (detections.length > 0) {
+            captureFaceImage(resizedDetections, frameCount);
+          }
+
+          frameCount++;
+        }
+      };
+
+      const checkVideoEnded = () => {
+        if (video.ended) {
+          console.log('Video ended. Script stopped.');
+          clearInterval(frameIntervalId);
+        }
+      };
+
+      const frameIntervalId = setInterval(() => {
+        processFrames();
+        checkVideoEnded();
+      }, 100); // Adjust the interval as needed
+    }
+
+    function captureFaceImage(detections, frameNumber) {
+      const face = detections[0];
+
+      const faceCanvas = document.createElement('canvas');
+      const faceCanvasContext = faceCanvas.getContext('2d');
+      faceCanvas.width = face.detection.box.width;
+      faceCanvas.height = face.detection.box.height;
+
+      faceCanvasContext.drawImage(video, face.detection.box.x, face.detection.box.y, face.detection.box.width, face.detection.box.height, 0, 0, face.detection.box.width, face.detection.box.height);
+
+      const dataURL = faceCanvas.toDataURL('image/png');
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = dataURL;
+      downloadLink.download = `frames/frame_${frameNumber}.png`;
+      downloadLink.click();
+    }
+
+    // Start processing automatically when the script loads
+    startProcessing();
+  </script>
+</body>
+</html>
